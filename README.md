@@ -2,13 +2,13 @@
 
 A modern and responsive weather dashboard built with Vanilla JavaScript, Tailwind CSS, Vite, and OpenWeather API.
 
-## 🚀 Live Demo
-
-[**View Live Demo →**](YOUR_LIVE_SITE_URL)
-
 ## 📸 Preview
 
 ![Weather Dashboard](./src/screenshot/Weather-Dashboard.png)
+
+## 🚀 Live Demo
+
+[**View Live Demo →**](YOUR_LIVE_SITE_URL)
 
 ## ✨ Features
 
