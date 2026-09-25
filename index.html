@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Weather Dashboard</title>
+
+    <link rel="icon" href="data:," />
+  </head>
+
+  <body class="min-h-screen bg-[#0b0f0e] text-white antialiased">
+    <main class="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+      <header class="flex items-center justify-between gap-4">
+        <div>
+          <p class="text-xs font-medium uppercase tracking-wider text-emerald-400">Weather</p>
+          <h1 class="mt-1 text-xl font-bold tracking-tight sm:text-2xl">Weather Dashboard</h1>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            id="unit-toggle"
+            type="button"
+            class="cursor-pointer rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/70 transition hover:border-emerald-400/30 hover:bg-emerald-400/10 hover:text-emerald-300"
+          >
+            °C
+          </button>
+        </div>
+      </header>
+
+      <section class="mt-6">
+        <form id="search-form" class="flex gap-2">
+          <div class="relative flex-1">
+            <input
+              id="city-input"
+              type="text"
+              placeholder="Search city..."
+              autocomplete="off"
+              class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30 transition focus:border-emerald-400/40 focus:bg-white/[0.07]"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="cursor-pointer rounded-xl bg-emerald-400 px-5 py-3 text-sm font-semibold text-black transition hover:bg-emerald-300"
+          >
+            Search
+          </button>
+        </form>
+
+        <p id="error-message" class="mt-2 hidden text-sm text-red-400"></p>
+      </section>
+
+      <section class="mt-6 grid gap-4 lg:grid-cols-3">
+        <div
+          class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/4 p-4 shadow-xl backdrop-blur-xl sm:p-5 lg:col-span-2"
+        >
+          <div
+            class="absolute right-0 top-0 h-40 w-40 rounded-full bg-emerald-400/10 blur-3xl"
+          ></div>
+
+          <div class="relative">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-xs font-medium text-white/40">Current Weather</p>
+
+                <h2 id="city-name" class="mt-1 text-2xl font-bold tracking-tight">Tehran</h2>
+
+                <p id="location-name" class="mt-0.5 text-xs text-white/40">Iran · Today</p>
+              </div>
+
+              <div
+                id="weather-description"
+                class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 text-xs font-medium text-emerald-300"
+              >
+                Clear
+              </div>
+            </div>
+
+            <div class="mt-6 flex items-center justify-between gap-4">
+              <div>
+                <div class="flex items-start">
+                  <span id="temperature" class="text-6xl font-bold tracking-tight sm:text-7xl">
+                    24
+                  </span>
+
+                  <span id="temperature-unit" class="mt-2 text-xl font-semibold text-white/40">
+                    °C
+                  </span>
+                </div>
+
+                <p id="feels-like" class="mt-1 text-xs text-white/40">Feels like 25°C</p>
+              </div>
+
+              <div id="weather-icon" class="text-6xl sm:text-7xl" aria-label="Clear weather">
+                ☀️
+              </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <div class="rounded-xl border border-white/10 bg-black/20 p-3">
+                <p class="text-xs text-white/35">Humidity</p>
+
+                <p id="humidity" class="mt-1 text-base font-semibold">42%</p>
+              </div>
+
+              <div class="rounded-xl border border-white/10 bg-black/20 p-3">
+                <p class="text-xs text-white/35">Wind</p>
+
+                <p id="wind-speed" class="mt-1 text-base font-semibold">14 km/h</p>
+              </div>
+
+              <div class="rounded-xl border border-white/10 bg-black/20 p-3">
+                <p class="text-xs text-white/35">Visibility</p>
+
+                <p id="visibility" class="mt-1 text-base font-semibold">10 km</p>
+              </div>
+
+              <div class="rounded-xl border border-white/10 bg-black/20 p-3">
+                <p class="text-xs text-white/35">Rain Chance</p>
+
+                <p id="rain-chance" class="mt-1 text-base font-semibold">5%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- weather details -->
+        <div
+          class="rounded-2xl border border-white/10 bg-white/[0.035] p-4 shadow-xl backdrop-blur-xl sm:p-5"
+        >
+          <div>
+            <p class="text-xs text-white/40">Weather Details</p>
+
+            <h3 class="mt-1 text-lg font-semibold">Today at a Glance</h3>
+          </div>
+
+          <div class="mt-5 flex flex-col gap-2">
+            <div
+              class="flex items-center justify-between rounded-xl border border-white/10 bg-black/20 px-3 py-2.5"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="text-base">🌅</span>
+
+                <p class="text-xs text-white/40">Sunrise</p>
+              </div>
+
+              <p id="sunrise" class="text-sm font-semibold">--</p>
+            </div>
+
+            <div
+              class="flex items-center justify-between rounded-xl border border-white/10 bg-black/20 px-3 py-2.5"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="text-base">🌇</span>
+
+                <p class="text-xs text-white/40">Sunset</p>
+              </div>
+
+              <p id="sunset" class="text-sm font-semibold">--</p>
+            </div>
+
+            <div
+              class="flex items-center justify-between rounded-xl border border-white/10 bg-black/20 px-3 py-2.5"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="text-base">☁️</span>
+
+                <p class="text-xs text-white/40">Cloud Cover</p>
+              </div>
+
+              <p id="cloud-cover" class="text-sm font-semibold">--</p>
+            </div>
+
+            <div
+              class="flex items-center justify-between rounded-xl border border-white/10 bg-black/20 px-3 py-2.5"
+            >
+              <div class="flex items-center gap-2.5">
+                <span class="text-base">🧭</span>
+
+                <p class="text-xs text-white/40">Wind Direction</p>
+              </div>
+
+              <p id="wind-direction" class="text-sm font-semibold">--</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="mt-4 rounded-xl border border-white/10 bg-white/[0.035] p-3 shadow-lg backdrop-blur-xl sm:p-4"
+      >
+        <div>
+          <p class="text-[11px] text-white/40">Forecast</p>
+
+          <h2 class="mt-0.5 text-lg font-semibold">Hourly Forecast</h2>
+        </div>
+
+        <div id="hourly-forecast" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
+      </section>
+
+      <section
+        class="mt-4 rounded-xl border border-white/10 bg-white/[0.035] p-3 shadow-lg backdrop-blur-xl sm:p-4"
+      >
+        <div>
+          <p class="text-[11px] text-white/40">Forecast</p>
+
+          <h2 class="mt-0.5 text-lg font-semibold">Daily Forecast</h2>
+        </div>
+
+        <div id="daily-forecast" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
